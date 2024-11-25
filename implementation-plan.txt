@@ -3,17 +3,17 @@ Plan of tests implementation
 ENVIRONMENT PREPARATION: 1 day
 - github connection - Done
 - Devide tests into types - Done
-- Define gherkin statements for each scenario
-- Define fixtures for each type
+- Define gherkin statements for each scenario - Done
+- Define fixtures for each type - Done
 
-IMPLEMENTATION: 6 to 10 days
+IMPLEMENTATION: 
 - Write fixtures
 - Write tests
 
 
 ##### SCENARIOS TYPES
 
---> LOGGING IN: 1 to 2 days
+--> LOGGING IN: - DONE
 #1
 SCENARIO: User should be able to log in with standard user given the correct credentials.
     GIVEN: User is in starting page (https://www.saucedemo.com/)
@@ -49,9 +49,7 @@ None
 
 =======
 
---> INVENTORY PAGE (main page, products page): 1 to 2 days
-
-
+--> INVENTORY PAGE (main page, products page): 
 #5
 SCENARIO: User should be able to filter the inventory according to the option chosen.
     GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)
@@ -65,11 +63,11 @@ SCENARIO: User should see the correct product details such as image, product nam
     THEN: All of the details should be visible and correct
 
 Fixtures
-Correct login and correct redirection to inventory page
+Correct login and correct redirection to inventory page - DONE
 
 =====
 
---> CART MANAGEMENT: 2 to 3 days
+--> CART MANAGEMENT: 
 #7
 SCENARIO: User should see the added product in their cart.
     GIVEN: User has a product added to the cart
@@ -112,7 +110,7 @@ Adding a product to the cart
 
 =====
 
---> CHECKOUT: 1 to 2 days
+--> CHECKOUT:
 #13
 SCENARIO: User should see the checkout overview with details such as payment, shipping info, and price total.
     GIVEN: User has products added to the cart AND: is in the Checkout-Overview page
@@ -137,7 +135,7 @@ Adding a product to the cart
 
 =====
 
-EXTRA SCENARIOS: 1 day
+EXTRA SCENARIOS: 
 #16
 SCENARIO: User should be able to go back to the Inventory page at any time using the side menu button
 GIVEN: User is any page of the website
