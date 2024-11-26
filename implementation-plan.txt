@@ -49,7 +49,7 @@ None
 
 =======
 
---> INVENTORY PAGE (main page, products page): 
+--> INVENTORY PAGE (main page, products page): - DONE
 #5
 SCENARIO: User should be able to filter the inventory according to the option chosen.
     GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)

@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 exports.expect = expect;
 exports.test = test.extend({
 
-    inventoryPage: async ({ page }, use) => {
+    page: async ({ page }, use) => {
 
         await page.goto('https://www.saucedemo.com/');
         await page.locator('[data-test="username"]').fill('standard_user');
@@ -12,6 +12,7 @@ exports.test = test.extend({
 
         await expect(page).toHaveURL(/.*inventory.html/);
         await use(page);
+
     }
 
 })
