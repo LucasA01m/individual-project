@@ -67,7 +67,7 @@ Correct login and correct redirection to inventory page - DONE
 
 =====
 
---> CART MANAGEMENT: 
+--> CART MANAGEMENT: - DONE
 #7
 SCENARIO: User should see the added product in their cart.
     GIVEN: User has a product added to the cart
