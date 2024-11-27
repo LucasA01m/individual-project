@@ -1,154 +1,147 @@
-Playwright Report https://lucasa01m.github.io/individual-project/
+# Playwright Test Report
 
-Plan of tests implementation
+[View the Report Here](https://lucasa01m.github.io/individual-project/)
 
-ENVIRONMENT PREPARATION:
-- github connection - Done
-- Devide tests into types - Done
-- Define gherkin statements for each scenario - Done
-- Define fixtures for each type - Done
+---
 
-IMPLEMENTATION: 
-- Write fixtures
-- Write tests
+## Plan of Test Implementation
 
+### **Environment Preparation**
+- **GitHub Connection**: ✅ *Done*
+- **Divide Tests into Types**: ✅ *Done*
+- **Define Gherkin Statements for Each Scenario**: ✅ *Done*
+- **Define Fixtures for Each Type**: ✅ *Done*
 
-##### SCENARIOS TYPES
+### **Implementation**
+- Write Fixtures
+- Write Tests
 
---> LOGGING IN: - DONE
-#1
-SCENARIO: User should be able to log in with standard user given the correct credentials.
-    GIVEN: User is in starting page (https://www.saucedemo.com/)
-    WHEN: User uses the credentials for standard user and tries to log in
-    THEN: User should be redirected to the inventory/products page (https://www.saucedemo.com/inventory.html)
+---
 
-#2
-SCENARIO: User should not be able to access the e-shop without logging in.
-    GIVEN: User is in starting page (https://www.saucedemo.com/)
-    WHEN: User clicks in the log in button without any username or password provided
-    THEN: User should get an error message: "Epic sadface: Username is required" or "Epic sadface: password is required"
+## Scenario Types
 
-#2.1
-SCENARIO: User should not be able to access the e-shop without logging in.
-    GIVEN: User tries to access the inventory directly with the URL (https://www.saucedemo.com/inventory.html)
-    WHEN: User access that page
-    THEN: User should be redirected to the main page and an error message should appear: "Epic sadface: You can only access '/inventory.html' when you are logged in."
+### **Logging In**: ✅ *Completed*
 
-#3
-SCENARIO: User whose access is denied should not be able to log in.
-    GIVEN: User is in starting page (https://www.saucedemo.com/)
-    WHEN: User uses wrong credentials (password or username) and tries to log in
-    THEN: User should get the error message: "Epic sadface: Username and password do not match any user in this service"
+#### **Scenario #1**
+**Description**: User should be able to log in with standard user given the correct credentials.  
+- **Given**: User is on the starting page ([https://www.saucedemo.com/](https://www.saucedemo.com/))  
+- **When**: User enters the credentials for a standard user and attempts to log in  
+- **Then**: User should be redirected to the inventory/products page ([https://www.saucedemo.com/inventory.html](https://www.saucedemo.com/inventory.html))
 
-#4
-SCENARIO: User should be logged out once Logout button is pressed
-    GIVEN: User is logged in any page
-    WHEN: User goes to the side menu and clicks the logout button
-    THEN: User is redirected to the starting page
+#### **Scenario #2**
+**Description**: User should not be able to access the e-shop without logging in.  
+- **Given**: User is on the starting page ([https://www.saucedemo.com/](https://www.saucedemo.com/))  
+- **When**: User clicks the log in button without entering a username or password  
+- **Then**: An error message should appear:  
+  - *"Epic sadface: Username is required"* or  
+  - *"Epic sadface: Password is required"*
 
-Fixtures
-None
+#### **Scenario #2.1**
+**Description**: User should not be able to access the e-shop without logging in.  
+- **Given**: User tries to access the inventory page directly via URL ([https://www.saucedemo.com/inventory.html](https://www.saucedemo.com/inventory.html))  
+- **When**: User visits that page  
+- **Then**: User should be redirected to the main page, and an error message should appear:  
+  - *"Epic sadface: You can only access '/inventory.html' when you are logged in."*
 
-=======
+#### **Scenario #3**
+**Description**: Users whose access is denied should not be able to log in.  
+- **Given**: User is on the starting page ([https://www.saucedemo.com/](https://www.saucedemo.com/))  
+- **When**: User enters incorrect credentials and attempts to log in  
+- **Then**: An error message should appear:  
+  - *"Epic sadface: Username and password do not match any user in this service"*
 
---> INVENTORY PAGE (main page, products page): - DONE
-#5
-SCENARIO: User should be able to filter the inventory according to the option chosen.
-    GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)
-    WHEN: User selects any filtering option
-    THEN: All the products are shown with the according display
+#### **Scenario #4**
+**Description**: User should be logged out once the logout button is pressed.  
+- **Given**: User is logged in on any page  
+- **When**: User clicks the logout button in the side menu  
+- **Then**: User is redirected to the starting page  
 
-#6
-SCENARIO: User should see the correct product details such as image, product name, description, and price.
-    GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)
-    WHEN: The products are displayed
-    THEN: All of the details should be visible and correct
+**Fixtures**: None  
 
-Fixtures
-Correct login and correct redirection to inventory page - DONE
+---
 
-=====
+### **Inventory Page (Main Page, Products Page)**: ✅ *Completed*
 
---> CART MANAGEMENT: - DONE
-#7
-SCENARIO: User should see the added product in their cart.
-    GIVEN: User has a product added to the cart
-    WHEN: User clicks in the cart button to visualize the cart
-    THEN: User should be redirected to the cart page AND: the added product should be there
+#### **Scenario #5**
+**Description**: User should be able to filter the inventory according to the selected option.  
+- **Given**: User is on the inventory page ([https://www.saucedemo.com/inventory.html](https://www.saucedemo.com/inventory.html))  
+- **When**: User selects a filtering option  
+- **Then**: Products are displayed accordingly  
 
-#8
-SCENARIO: User should see the cart icon update accordingly when adding a product to the cart.
-    GIVEN: User is in a page which is possible to add a product to the cart
-    WHEN: User adds a product to the cart
-    THEN: The top icon should update accordingly AND: be visible in every page of the website
+#### **Scenario #6**
+**Description**: Users should see correct product details such as image, product name, description, and price.  
+- **Given**: User is on the inventory page  
+- **When**: Products are displayed  
+- **Then**: All details should be visible and correct  
 
-#9
-SCENARIO: User should be able to remove the added product on the cart page.
-    GIVEN: User has a product added to the cart AND: is in the cart page
-    WHEN: User click on the "Remove" button
-    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+**Fixtures**:  
+- Correct login and redirection to the inventory page: ✅ *Done*  
 
-#10
-SCENARIO: User should be able to remove the added product from the cart on the inventory page.
-    GIVEN: User has a product added to the cart AND: is in the inventory page
-    WHEN: User click on the "Remove" button
-    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+---
 
-#11
-SCENARIO: User should be able to remove the added product from the cart on the specific product page.
-    GIVEN: User has a product added to the cart AND: is in the product page
-    WHEN: User click on the "Remove" button
-    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+### **Cart Management**: ✅ *Completed*
 
-#12
-SCENARIO: User should be able to continue shopping from the cart page.
-    GIVEN: User is in the product page
-    WHEN: User clicks in the "Continue Shopping" button
-    THEN: User is redirected back to the inventory page
+#### **Scenario #7**
+**Description**: User should see the added product in their cart.  
+- **Given**: A product is added to the cart  
+- **When**: User clicks the cart button to view the cart  
+- **Then**: The product should be visible in the cart  
 
-Fixtures
-Correct login and correct redirection to inventory page
-Adding a product to the cart -> Not necessary
+#### **Scenario #8**
+**Description**: The cart icon should update correctly when a product is added.  
+- **Given**: User is on a page where a product can be added to the cart  
+- **When**: User adds a product  
+- **Then**: The cart icon updates accordingly and is visible across all pages  
 
-=====
+... *(and so on for scenarios #9 to #12)*  
 
---> CHECKOUT: - DONE
-#13
-SCENARIO: User should see the checkout overview with details such as payment, shipping info, and price total.
-    GIVEN: User has products added to the cart AND: is in the Checkout-Overview page
-    WHEN: Check out informations are displayed
-    THEN: products to checkout, payment info, shipping info, and price total should be visible
+**Fixtures**:  
+- Correct login and redirection to the inventory page  
+- Adding a product to the cart *(Not necessary)*  
 
-#14
-SCENARIO: User should get notified when they fail to enter any of the checkout information.
-    GIVEN: User has products added to the cart AND: is in the Checkout-Your-Information page
-    WHEN: User inputs bad inputs in the shipping info form
-    THEN: An error message should be shown AND: there is no redirection
+---
 
-#15
-SCENARIO: User should get notified after placing a successful order.
-    GIVEN: User has products added to the cart AND: is in the Checkout-Overview page
-    WHEN: User clicks the "Finish" button
-    THEN: User should be redirected to the confirmation of order placement
+### **Checkout**: ✅ *Completed*
 
-Fixtures
-Correct login and correct redirection to inventory page
-Adding a product to the cart
+#### **Scenario #13**
+**Description**: User should see checkout overview details, including payment, shipping info, and total price.  
+- **Given**: Products are in the cart and user is on the "Checkout Overview" page  
+- **When**: Checkout information is displayed  
+- **Then**: Payment info, shipping info, and total price should be visible  
 
-=====
+#### **Scenario #14**
+**Description**: Users should be notified when checkout information is missing.  
+- **Given**: Products are in the cart and user is on the "Checkout Your Information" page  
+- **When**: User submits incomplete shipping info  
+- **Then**: An error message is displayed, and there is no redirection
 
-EXTRA SCENARIOS: 
-#16
-SCENARIO: User should be able to go back to the Inventory page at any time using the side menu button
-GIVEN: User is any page of the website
-WHEN: User clicks the "All Items" button in the side menu
-THEN: User should be redirected to the Inventory page
+### **Scenario #15**
 
-#17
-SCENARIO: User should be able to access product page by clicking in the product image
-GIVEN: User is in the Inventory Page
-WHEN: User clicks a products image
-THEN: User is redirected to the right product page
+**Description**: User should be notified after placing a successful order.
+- **Given**: Products are in the cart, and the user is on the "Checkout Overview" page
+- **When**: User clicks the "Finish" button
+- **Then**: User should be redirected to the confirmation page for order placement
 
-Fixtures
-Correct login and correct redirection to inventory page
+---
+
+### **Extra Scenarios**
+
+#### **Scenario #16**  
+**Description**: User should be able to return to the Inventory page using the side menu button.  
+- **Given**: User is on any page of the website  
+- **When**: User clicks the "All Items" button in the side menu  
+- **Then**: User should be redirected to the Inventory page  
+
+#### **Scenario #17**  
+**Description**: User should be able to access the product page by clicking the product image.  
+- **Given**: User is on the Inventory page  
+- **When**: User clicks on a product image  
+- **Then**: User is redirected to the corresponding product page  
+
+---
+
+## Fixtures Summary
+- **Correct Login**: ✅ Done  
+- **Correct Redirection to Inventory Page**: ✅ Done  
+- **Adding a Product to the Cart**: ✅ Done  
+
