@@ -56,6 +56,7 @@
 - **When**: User clicks the logout button in the side menu  
 - **Then**: User is redirected to the starting page  
 
+
 **Fixtures**: None  
 
 ---
@@ -73,6 +74,7 @@
 - **Given**: User is on the inventory page  
 - **When**: Products are displayed  
 - **Then**: All details should be visible and correct  
+
 
 **Fixtures**:  
 - Correct login and redirection to the inventory page: ✅ *Done*  
@@ -93,7 +95,30 @@
 - **When**: User adds a product  
 - **Then**: The cart icon updates accordingly and is visible across all pages  
 
-... *(and so on for scenarios #9 to #12)*  
+#### **Scenario #9**  
+**Description**: User should be able to remove the added product on the cart page.  
+- **Given**: User has a product added to the cart and is on the cart page  
+- **When**: User clicks the "Remove" button  
+- **Then**: The product should be removed from the cart and the cart icon should update accordingly  
+
+#### **Scenario #10**  
+**Description**: User should be able to remove the added product from the cart on the inventory page.  
+- **Given**: User has a product added to the cart and is on the inventory page  
+- **When**: User clicks the "Remove" button  
+- **Then**: The product should be removed from the cart and the cart icon should update accordingly  
+
+#### **Scenario #11**  
+**Description**: User should be able to remove the added product from the cart on the specific product page.  
+- **Given**: User has a product added to the cart and is on the product page  
+- **When**: User clicks the "Remove" button  
+- **Then**: The product should be removed from the cart and the cart icon should update accordingly  
+
+#### **Scenario #12**  
+**Description**: User should be able to continue shopping from the cart page.  
+- **Given**: User is on the product page  
+- **When**: User clicks the "Continue Shopping" button  
+- **Then**: User is redirected back to the inventory page
+
 
 **Fixtures**:  
 - Correct login and redirection to the inventory page  
@@ -121,6 +146,11 @@
 - **Given**: Products are in the cart, and the user is on the "Checkout Overview" page
 - **When**: User clicks the "Finish" button
 - **Then**: User should be redirected to the confirmation page for order placement
+
+
+**Fixtures**:  
+- Correct login and redirection to the inventory page  
+- Adding a product to the cart *(Not necessary)*  
 
 ---
 
