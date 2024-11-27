@@ -1,6 +1,6 @@
 Plan of tests implementation
 
-ENVIRONMENT PREPARATION: 1 day
+ENVIRONMENT PREPARATION:
 - github connection - Done
 - Devide tests into types - Done
 - Define gherkin statements for each scenario - Done
