@@ -1,1 +1,154 @@
 Playwright Report https://lucasa01m.github.io/individual-project/
+
+Plan of tests implementation
+
+ENVIRONMENT PREPARATION:
+- github connection - Done
+- Devide tests into types - Done
+- Define gherkin statements for each scenario - Done
+- Define fixtures for each type - Done
+
+IMPLEMENTATION: 
+- Write fixtures
+- Write tests
+
+
+##### SCENARIOS TYPES
+
+--> LOGGING IN: - DONE
+#1
+SCENARIO: User should be able to log in with standard user given the correct credentials.
+    GIVEN: User is in starting page (https://www.saucedemo.com/)
+    WHEN: User uses the credentials for standard user and tries to log in
+    THEN: User should be redirected to the inventory/products page (https://www.saucedemo.com/inventory.html)
+
+#2
+SCENARIO: User should not be able to access the e-shop without logging in.
+    GIVEN: User is in starting page (https://www.saucedemo.com/)
+    WHEN: User clicks in the log in button without any username or password provided
+    THEN: User should get an error message: "Epic sadface: Username is required" or "Epic sadface: password is required"
+
+#2.1
+SCENARIO: User should not be able to access the e-shop without logging in.
+    GIVEN: User tries to access the inventory directly with the URL (https://www.saucedemo.com/inventory.html)
+    WHEN: User access that page
+    THEN: User should be redirected to the main page and an error message should appear: "Epic sadface: You can only access '/inventory.html' when you are logged in."
+
+#3
+SCENARIO: User whose access is denied should not be able to log in.
+    GIVEN: User is in starting page (https://www.saucedemo.com/)
+    WHEN: User uses wrong credentials (password or username) and tries to log in
+    THEN: User should get the error message: "Epic sadface: Username and password do not match any user in this service"
+
+#4
+SCENARIO: User should be logged out once Logout button is pressed
+    GIVEN: User is logged in any page
+    WHEN: User goes to the side menu and clicks the logout button
+    THEN: User is redirected to the starting page
+
+Fixtures
+None
+
+=======
+
+--> INVENTORY PAGE (main page, products page): - DONE
+#5
+SCENARIO: User should be able to filter the inventory according to the option chosen.
+    GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)
+    WHEN: User selects any filtering option
+    THEN: All the products are shown with the according display
+
+#6
+SCENARIO: User should see the correct product details such as image, product name, description, and price.
+    GIVEN: User is in the inventory page (https://www.saucedemo.com/inventory.html)
+    WHEN: The products are displayed
+    THEN: All of the details should be visible and correct
+
+Fixtures
+Correct login and correct redirection to inventory page - DONE
+
+=====
+
+--> CART MANAGEMENT: - DONE
+#7
+SCENARIO: User should see the added product in their cart.
+    GIVEN: User has a product added to the cart
+    WHEN: User clicks in the cart button to visualize the cart
+    THEN: User should be redirected to the cart page AND: the added product should be there
+
+#8
+SCENARIO: User should see the cart icon update accordingly when adding a product to the cart.
+    GIVEN: User is in a page which is possible to add a product to the cart
+    WHEN: User adds a product to the cart
+    THEN: The top icon should update accordingly AND: be visible in every page of the website
+
+#9
+SCENARIO: User should be able to remove the added product on the cart page.
+    GIVEN: User has a product added to the cart AND: is in the cart page
+    WHEN: User click on the "Remove" button
+    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+
+#10
+SCENARIO: User should be able to remove the added product from the cart on the inventory page.
+    GIVEN: User has a product added to the cart AND: is in the inventory page
+    WHEN: User click on the "Remove" button
+    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+
+#11
+SCENARIO: User should be able to remove the added product from the cart on the specific product page.
+    GIVEN: User has a product added to the cart AND: is in the product page
+    WHEN: User click on the "Remove" button
+    THEN: The product should be removed to the cart AND: cart icon should update accordingly
+
+#12
+SCENARIO: User should be able to continue shopping from the cart page.
+    GIVEN: User is in the product page
+    WHEN: User clicks in the "Continue Shopping" button
+    THEN: User is redirected back to the inventory page
+
+Fixtures
+Correct login and correct redirection to inventory page
+Adding a product to the cart -> Not necessary
+
+=====
+
+--> CHECKOUT: - DONE
+#13
+SCENARIO: User should see the checkout overview with details such as payment, shipping info, and price total.
+    GIVEN: User has products added to the cart AND: is in the Checkout-Overview page
+    WHEN: Check out informations are displayed
+    THEN: products to checkout, payment info, shipping info, and price total should be visible
+
+#14
+SCENARIO: User should get notified when they fail to enter any of the checkout information.
+    GIVEN: User has products added to the cart AND: is in the Checkout-Your-Information page
+    WHEN: User inputs bad inputs in the shipping info form
+    THEN: An error message should be shown AND: there is no redirection
+
+#15
+SCENARIO: User should get notified after placing a successful order.
+    GIVEN: User has products added to the cart AND: is in the Checkout-Overview page
+    WHEN: User clicks the "Finish" button
+    THEN: User should be redirected to the confirmation of order placement
+
+Fixtures
+Correct login and correct redirection to inventory page
+Adding a product to the cart
+
+=====
+
+EXTRA SCENARIOS: 
+#16
+SCENARIO: User should be able to go back to the Inventory page at any time using the side menu button
+GIVEN: User is any page of the website
+WHEN: User clicks the "All Items" button in the side menu
+THEN: User should be redirected to the Inventory page
+
+#17
+SCENARIO: User should be able to access product page by clicking in the product image
+GIVEN: User is in the Inventory Page
+WHEN: User clicks a products image
+THEN: User is redirected to the right product page
+
+Fixtures
+Correct login and correct redirection to inventory page
