@@ -106,11 +106,11 @@ SCENARIO: User should be able to continue shopping from the cart page.
 
 Fixtures
 Correct login and correct redirection to inventory page
-Adding a product to the cart
+Adding a product to the cart -> Not necessary
 
 =====
 
---> CHECKOUT:
+--> CHECKOUT: - DONE
 #13
 SCENARIO: User should see the checkout overview with details such as payment, shipping info, and price total.
     GIVEN: User has products added to the cart AND: is in the Checkout-Overview page

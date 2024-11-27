@@ -1,6 +1,8 @@
 const { test, expect } = require('./setup-login');
 
-test('SCENARIO: User should be able to filter the inventory according to the option chosen.', async ({ page }) => {
+//#5 - DONE
+test('SCENARIO: User should be able to filter the inventory according to the option chosen.', async ({ loginPage: page }) => {
+    // Helper function to generate a random filtering choice
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
@@ -12,7 +14,7 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
     });
 
     await test.step('WHEN: User selects any filtering option', async () => {
-        switch (2) { //randomly chooses a sorting option
+        switch (getRandomInt(4)) { //randomly chooses a sorting option
             case 0:
                 choice = "Name (A to Z)"
                 break;
@@ -26,11 +28,13 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
                 choice = "Price (high to low)";
                 break;
         }
-        await page.locator('data-test=product-sort-container').selectOption(choice); //apply the choice in the page
+        // Apply the selected option
+        await page.locator('data-test=product-sort-container').selectOption(choice);
 
     });
 
     await test.step('THEN: All the products are shown with the according display', async () => {
+        // Verify that the active filter matches the selected choice.
         await expect(page.locator('data-test=active-option')).toContainText(choice);
         let count;
         let sortedByPage;
@@ -42,15 +46,16 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
                 count = await page.locator('data-test=inventory-item').count();
                 sortedByPage = []
 
+                // Gather product names from the page
                 for (let i = 0; i < count; i++) {
                     let item = await page.locator('data-test=inventory-item-name').nth(i).textContent();
                     sortedByPage.push(item);
                 }
 
-                // Sorts whatever display in the page in alphabetically order
+                // Sort the names for verification.
                 sortAtoZ = sortedByPage.toSorted();
 
-                // Tests if page sorting is A to Z
+                // Verify that the page sorting matches the expected order.
                 expect(JSON.stringify(sortedByPage) == JSON.stringify(sortAtoZ)).toBeTruthy();
 
                 break;
@@ -59,15 +64,16 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
                 count = await page.locator('data-test=inventory-item').count();
                 sortedByPage = []
 
+                // Gather product names from the page
                 for (let i = 0; i < count; i++) {
                     let item = await page.locator('data-test=inventory-item-name').nth(i).textContent();
                     sortedByPage.push(item);
                 }
 
-                // Sorts whatever display in the page in alphabetically order
+                // Sort the names for verification.
                 sortAtoZ = sortedByPage.toSorted();
 
-                // Tests if page sorting is Z to A
+                // Verify that the page sorting matches the expected order.
                 expect(JSON.stringify(sortedByPage) == JSON.stringify(sortAtoZ.reverse())).toBeTruthy();
 
                 break;
@@ -76,12 +82,14 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
                 count = await page.locator('data-test=inventory-item').count();
                 sortedByPage = []
 
+                // Gather product prices from the page
                 for (let i = 0; i < count; i++) {
                     let item = await page.locator('data-test=inventory-item-price').nth(i).textContent();
+                    //Extracts from the price string, the according float number
                     sortedByPage.push(parseFloat(item.match(/[+-]?\d+(\.\d+)?/g)));
                 }
 
-                // Sorts whatever display in the page in alphabetically order
+                // Sort the prices for verification.
                 sortLowToHigh = sortedByPage.toSorted((a, b) => a - b);
 
                 // Tests if page sorting is Low to High
@@ -92,12 +100,14 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
                 count = await page.locator('data-test=inventory-item').count();
                 sortedByPage = []
 
+                // Gather product prices from the page
                 for (let i = 0; i < count; i++) {
                     let item = await page.locator('data-test=inventory-item-price').nth(i).textContent();
+                    //Extracts from the price string, the according float number
                     sortedByPage.push(parseFloat(item.match(/[+-]?\d+(\.\d+)?/g)));
                 }
 
-                // Sorts whatever display in the page in alphabetically order
+                // Sort the prices for verification.
                 sortLowToHigh = sortedByPage.toSorted((a, b) => a - b);
 
                 // Tests if page sorting is High to Low
@@ -108,7 +118,9 @@ test('SCENARIO: User should be able to filter the inventory according to the opt
 
 });
 
-test('SCENARIO: User should see the correct product details such as image, product name, description, and price.', async ({ page }) => {
+//#6 - DONE
+test('SCENARIO: User should see the correct product details such as image, product name, description, and price.', async ({ loginPage: page }) => {
+    // Helper function to generate a random product ID
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
@@ -118,11 +130,15 @@ test('SCENARIO: User should see the correct product details such as image, produ
     })
 
     await test.step('WHEN: The products are displayed', async () => {
+        // Ensure the inventory list is visible.
         await expect(page.locator('[data-test="inventory-list"]')).toBeVisible();
     })
 
     await test.step('THEN: All of the details should be visible and correct', async () => {
+        // Select a random product to test.
         let item = getRandomInt(6);
+
+        // Verify that the product details are visible.
         await expect(page.locator(`[data-test="item-${item}-img-link"]`)).toBeVisible();
         await expect(page.locator('[data-test="inventory-item-name"]').nth(item)).toBeVisible();
         await expect(page.locator('[data-test="inventory-item-desc"]').nth(item)).toBeVisible();

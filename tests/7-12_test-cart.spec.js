@@ -3,9 +3,10 @@ const { test, expect } = require('./setup-login');
 const baseURL = 'https://www.saucedemo.com'
 
 //#7 - DONE
-test('SCENARIO: User should see the added product in their cart.', async ({ page }) => {
+test('SCENARIO: User should see the added product in their cart.', async ({ loginPage: page }) => {
 
     await test.step('GIVEN: User has some product added to the cart', async () => {
+        //User adds multiple products to the cart and ensures they are added
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
         await page.locator('[data-test="add-to-cart-sauce-labs-bike-light"]').click();
         await page.locator('[data-test="add-to-cart-sauce-labs-fleece-jacket"]').click();
@@ -21,6 +22,7 @@ test('SCENARIO: User should see the added product in their cart.', async ({ page
     })
 
     await test.step('THEN: User should be redirected to the cart page AND: the added product should be there', async () => {
+        // Verify if the products are in the cart
         await expect(page).toHaveURL(/.*cart.html/);
         await expect(page.locator('[data-test="item-4-title-link"]')).toBeVisible();
         await expect(page.locator('[data-test="item-0-title-link"]')).toBeVisible();
@@ -29,14 +31,14 @@ test('SCENARIO: User should see the added product in their cart.', async ({ page
 });
 
 //#8 - DONE
-test('SCENARIO: User should see the cart icon update accordingly when adding a product to the cart.', async ({ page }) => {
-
+test('SCENARIO: User should see the cart icon update accordingly when adding a product to the cart.', async ({ loginPage: page }) => {
+    // Helper function to generate a random product ID
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
     await test.step('GIVEN: User is in a page which is possible to add a product to the cart', async () => {
-
+        //Randomly choose a product to enter
         switch (getRandomInt(4)) {
             case 0:
                 await page.goto(baseURL + '/inventory-item.html?id=0');
@@ -61,6 +63,7 @@ test('SCENARIO: User should see the cart icon update accordingly when adding a p
     })
 
     await test.step('THEN: The top icon should update accordingly AND: be visible in every page of the website', async () => {
+        // Go to different pages to check if the icon is visible, right and consistent
         await page.goto(baseURL + '/inventory.html');
         await expect(page.locator('[data-test="shopping-cart-link"]')).toContainText('1');
         for (let i = 0; i < 6; i++) {
@@ -73,10 +76,7 @@ test('SCENARIO: User should see the cart icon update accordingly when adding a p
 });
 
 //#9 - DONE
-test('SCENARIO: User should be able to remove the added product on the cart page.', async ({ page }) => {
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
+test('SCENARIO: User should be able to remove the added product on the cart page.', async ({ loginPage: page }) => {
 
     await test.step('GIVEN: User has a product added to the cart AND: is in the cart page', async () => {
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -100,8 +100,8 @@ test('SCENARIO: User should be able to remove the added product on the cart page
 
 });
 
-//#10
-test('SCENARIO: User should be able to remove the added product from the cart on the inventory page.', async ({ page }) => {
+//#10 - DONE
+test('SCENARIO: User should be able to remove the added product from the cart on the inventory page.', async ({ loginPage: page }) => {
 
     await test.step('GIVEN: User has a product added to the cart AND: is in the inventory page', async () => {
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -123,8 +123,8 @@ test('SCENARIO: User should be able to remove the added product from the cart on
 
 });
 
-//#11
-test('SCENARIO: User should be able to remove the added product from the cart on the specific product page.', async ({ page }) => {
+//#11 - DONE
+test('SCENARIO: User should be able to remove the added product from the cart on the specific product page.', async ({ loginPage: page }) => {
 
     await test.step('GIVEN: User has a product added to the cart AND: is in the product page', async () => {
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -146,8 +146,8 @@ test('SCENARIO: User should be able to remove the added product from the cart on
 
 });
 
-//#12
-test('SCENARIO: User should be able to continue shopping from the cart page.', async ({ page }) => {
+//#12 - DONE
+test('SCENARIO: User should be able to continue shopping from the cart page.', async ({ loginPage: page }) => {
 
     await test.step('GIVEN: User is in the cart page', async () => {
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
