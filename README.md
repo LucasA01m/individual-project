@@ -124,7 +124,7 @@
 
 ---
 
-### **Extra Scenarios**
+### **Extra Scenarios** ✅ *Completed*
 
 #### **Scenario #16**  
 **Description**: User should be able to return to the Inventory page using the side menu button.  
